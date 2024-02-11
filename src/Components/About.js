@@ -7,7 +7,7 @@ import "../App.css";
 
 
 const About = () => {
-  const [locations, setLocations] = useState([]); // Store the locations
+  const [ids, setIds] = useState([]); // Store the locations
 
   
 
@@ -25,12 +25,12 @@ const About = () => {
 
   const app = initializeApp(firebaseConfig);
 
- /*  useEffect(() => {
+  /*useEffect(() => {
     const db = getFirestore(app);
     const unsubscribe = collection(db, 'id')
       .then((doc) => {
         if (doc.exists) {
-          setLocations(doc.data());
+          setIds(doc.data());
         } else {
           console.log('No such document!');
         }
@@ -40,7 +40,7 @@ const About = () => {
       });
 
     return () => unsubscribe(); 
-  }, []); */
+  }, []); 
 
   return (
     /* <YMaps className="map">
@@ -54,7 +54,10 @@ const About = () => {
     </YMaps> */
     <YMaps className="map">
     <div>
-      <Map defaultState={{ center: [46.062615, 36.854095], zoom: 8}} className="map">
+    <Map defaultState={{ center: [46.062615, 36.854095], zoom: 8 }} className="map">
+          {Object.values(ids).map((id) => (
+            <Placemark geometry={[id.latitude, id.longitude]} />
+          ))}
 
 
       <Placemark geometry={[47.23, 39.67]} />
@@ -76,7 +79,7 @@ const About = () => {
       </Map>
     </div>
   </YMaps>
-);
+
 };
 
 
