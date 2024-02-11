@@ -1,9 +1,58 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+import { getFirestore, collection } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 import "../App.css";
 
-const About = () => (
-  <YMaps className="map">
+
+
+const About = () => {
+  const [locations, setLocations] = useState([]); // Store the locations
+
+  
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAy9MphweJbBDel5SKq3CbSePEhTscZd2w",
+    authDomain: "literallylitter-968b9.firebaseapp.com",
+    databaseURL: "https://literallylitter-968b9-default-rtdb.firebaseio.com/",
+    projectId: "literallylitter-968b9",
+    storageBucket: "literallylitter-968b9.appspot.com",
+    messagingSenderId: "686249910609",
+    appId: "1:686249910609:web:5ea9fbf5bdbfc973e63370",
+    measurementId: "G-VXRGZ3BJG2"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+
+ /*  useEffect(() => {
+    const db = getFirestore(app);
+    const unsubscribe = collection(db, 'id')
+      .then((doc) => {
+        if (doc.exists) {
+          setLocations(doc.data());
+        } else {
+          console.log('No such document!');
+        }
+      })
+      .catch((error) => {
+        console.log('Error getting document:', error);
+      });
+
+    return () => unsubscribe(); 
+  }, []); */
+
+  return (
+    /* <YMaps className="map">
+      <div>
+        <Map defaultState={{ center: [46.062615, 36.854095], zoom: 8 }} className="map">
+          {Object.values(locations).map((location) => (
+            <Placemark geometry={[location.latitude, location.longitude]} />
+          ))}
+        </Map>
+      </div>
+    </YMaps> */
+    <YMaps className="map">
     <div>
       <Map defaultState={{ center: [46.062615, 36.854095], zoom: 8}} className="map">
 
@@ -28,5 +77,7 @@ const About = () => (
     </div>
   </YMaps>
 );
+};
+
 
 export default About;
