@@ -87,7 +87,6 @@ function App() {
 
 
       <div id='about' className='section'><About /></div>
-      <img src={azov} className="map"/>
       <div id='research' className='section'><Work /></div>
       <div id='blabla' className='section'><Contact /></div>
       <div id='blabala' className='section'><Footer /></div>
